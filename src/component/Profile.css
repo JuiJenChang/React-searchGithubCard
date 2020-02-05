@@ -9,6 +9,10 @@
     padding-bottom: 30px;
     border-top: 1px solid #ffffff1a;
     border-bottom: 1px solid #ffffff1a;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 .profile-div{
     height: 8px;

@@ -26,7 +26,7 @@ class SearchUser extends Component {
     openSearch = () => {
         this.setState({
             search: true,
-            height: '120px',
+            height: '140px',
         })
     }
 
