@@ -1,34 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchUser from './component/SearchUser';
 import Profile from './component/Profile';
-import Title from'./component/Title';
+import Title from './component/Title';
 import './App.css';
 
 const API = 'https://api.github.com/users';
 
-class App extends Component {
-  constructor(props) {
-    super(props)
+function App() {
+  const [username, setUsername] = useState('JuiJenChang');
+  const [userData, setUserData] = useState({
+    username: '',
+    name: '',
+    avatar: '',
+    location: '',
+    repos: '',
+    followers: '',
+    following: '',
+    homeUrl: '',
+    notFound: '',
+  });
 
-    this.state = {
-      username: 'JuiJenChang',
-      name: '',
-      avatar: '',
-      location: '',
-      repos: '',
-      followers: '',
-      following: '',
-      homeUrl: '',
-      notFound: '',
-    }
-  }
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
-  fetchProfile = username => {
+  const handleChange = e => {
+    setUsername(e.target.value);
+  };
+
+  const fetchProfile = () => {
     let url = `${API}/${username}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        this.setState({
+        setUserData({
           username: data.login,
           name: data.name,
           avatar: data.avatar_url,
@@ -41,21 +46,19 @@ class App extends Component {
         })
       })
       .catch((error) => console.log('No found'))
-  }
+  };
 
-  componentDidMount() {
-    this.fetchProfile(this.state.username)
-  }
-
-  render() {
-    return (
-      <div>
-        <SearchUser fetchProfile={this.fetchProfile} />
-        <Title username={this.state.username} />
-        <Profile data={this.state} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <SearchUser
+        fetchProfile={fetchProfile}
+        username={userData.username}
+        handleChange={handleChange}
+      />
+      <Title username={userData.username} />
+      <Profile data={userData} />
+    </div>
+  );
 }
 
 export default App;

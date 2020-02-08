@@ -1,76 +1,59 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { IoMdSearch } from "react-icons/io";
 import './SearchUser.css';
 
-class SearchUser extends Component {
-    constructor(props) {
-        super(props)
+function SearchUser({ fetchProfile, username, handleChange }) {
+    const [search, setSearch] = useState(false);
+    const [height, setHeight] = useState('60px');
 
-        this.state = {
-            search: false,
-            height: '60px',
-        }
-    }
-
-    handlInput = e => {
+    const handlInput = e => {
         e.preventDefault();
-        let userName = this.refs.username.value;
-        this.props.fetchProfile(userName);
-        this.refs.username.value = '';
-        this.setState({
-            search: false,
-            height: '60px',
-        })
+        fetchProfile(username);
+        setSearch(false);
+        setHeight('60px');
     }
 
-    openSearch = () => {
-        this.setState({
-            search: true,
-            height: '140px',
-        })
+    const openSearch = () => {
+        setSearch(true);
+        setHeight('140px');
     }
 
-    closeSearch = () => {
-        this.setState({
-            search: false,
-            height: '60px',
-        })
+    const closeSearch = () => {
+        setSearch(false);
+        setHeight('60px');
     }
-
-    render() {
-        return (
-            <div className="search-header" style={{ height: this.state.height }}>
-                {this.state.search ?
-                    <form className="search-form" onSubmit={this.handlInput}>
-                        <header className="search-title">
-                            <h1>
-                                <a href="/">GitHub user card • React</a>
-                            </h1>
-                            <IoMdSearch
-                                className="search-icon"
-                                onClick={this.closeSearch}
-                            />
-                        </header>
-                        <input
-                            className="search-input"
-                            type="text"
-                            ref="username"
-                            placeholder="Search User"
-                        />
-                    </form> :
+    return (
+        <div className="search-header" style={{ height }}>
+            {search ?
+                <form className="search-form" onSubmit={handlInput}>
                     <header className="search-title">
                         <h1>
                             <a href="/">GitHub user card • React</a>
                         </h1>
                         <IoMdSearch
                             className="search-icon"
-                            onClick={this.openSearch}
+                            onClick={closeSearch}
                         />
                     </header>
-                }
-            </div>
-        );
-    }
+                    <input
+                        className="search-input"
+                        type="text"
+                        onChange={handleChange}
+                        placeholder="Search User"
+                    />
+                </form> :
+                <header className="search-title">
+                    <h1>
+                        <a href="/">GitHub user card • React</a>
+                    </h1>
+                    <IoMdSearch
+                        className="search-icon"
+                        onClick={openSearch}
+                    />
+                </header>
+            }
+        </div>
+    );
 }
 
 export default SearchUser;
