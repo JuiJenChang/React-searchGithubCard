@@ -1,5 +1,14 @@
 .profile-error{
-    text-align: center;
+    margin: auto;
+    width: 220px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    border-top: 1px solid #ffffff1a;
+    border-bottom: 1px solid #ffffff1a;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
     color: #ffffff;
 }
 .profile-main{

@@ -28,24 +28,26 @@ function App() {
     setUsername(e.target.value);
   };
 
-  const fetchProfile = () => {
-    let url = `${API}/${username}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setUserData({
-          username: data.login,
-          name: data.name,
-          avatar: data.avatar_url,
-          location: data.location,
-          repos: data.public_repos,
-          followers: data.followers,
-          following: data.following,
-          homeUrl: data.html_url,
-          notFound: data.message
-        })
+  const fetchProfile = async () => {
+    try {
+      let url = `${API}/${username}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      setUserData({
+        username: data.login,
+        name: data.name,
+        avatar: data.avatar_url,
+        location: data.location,
+        repos: data.public_repos,
+        followers: data.followers,
+        following: data.following,
+        homeUrl: data.html_url,
+        notFound: data.message
       })
-      .catch((error) => console.log('No found'))
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
 
   return (

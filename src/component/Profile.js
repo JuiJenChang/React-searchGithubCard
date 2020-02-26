@@ -6,7 +6,7 @@ function Profile({ data }) {
     const followers = `${data.homeUrl}/followers`;
     const repositories = `${data.homeUrl}?tab=repositories`;
     const following = `${data.homeUrl}/following`;
-    if (data.notFound === 'Not Found')
+    if (data.notFound === "Not Found")
         return (
             <div className="profile-error">
                 <h2>Oops !!!</h2>
