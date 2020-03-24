@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import SearchUser from './component/SearchUser';
-import Profile from './component/Profile';
-import Title from './component/Title';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import SearchUser from "./component/searchuser/SearchUser";
+import Profile from "./component/profile/Profile";
+import Title from "./component/title/Title";
+import "./App.css";
 
-const API = 'https://api.github.com/users';
+const API = "https://api.github.com/users";
 
 function App() {
-  const [username, setUsername] = useState('JuiJenChang');
+  const [username, setUsername] = useState("JuiJenChang");
   const [userData, setUserData] = useState({
-    username: '',
-    name: '',
-    avatar: '',
-    location: '',
-    repos: '',
-    followers: '',
-    following: '',
-    homeUrl: '',
-    notFound: '',
+    username: "",
+    name: "",
+    avatar: "",
+    location: "",
+    repos: "",
+    followers: "",
+    following: "",
+    homeUrl: "",
+    notFound: ""
   });
 
   useEffect(() => {
@@ -43,15 +43,14 @@ function App() {
         following: data.following,
         homeUrl: data.html_url,
         notFound: data.message
-      })
-    }
-    catch (error) {
+      });
+    } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div>
+    <div className="App">
       <SearchUser
         fetchProfile={fetchProfile}
         username={userData.username}
