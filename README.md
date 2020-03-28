@@ -10,9 +10,9 @@ This repository is my practice project about call the api from GitHub API v3.
 
 # Features
 * searching for github username
-* repositories
-* followers 
-* following
+* displaying repositories
+* displaying followers 
+* displaying following
 
 # Used technologies
 * React / create-react-app
